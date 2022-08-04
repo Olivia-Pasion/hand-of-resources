@@ -14,6 +14,15 @@ describe('backend-express-template routes', () => {
     expect(resp.body[0]).toEqual({
       id: expect.any(String),
       name: expect.any(String),
+    });
+    console.log('HERE', resp.body);
+  });
+
+  it('#GET /ac_villagers/:id should return villager detail', async () => {
+    const resp = await request(app).get('/ac_villagers/1');
+    expect(resp.body.length).toEqual(1);
+    expect(resp.body[0]).toEqual({
+      name: expect.any(String),
       species: expect.any(String),
       catchphrase: expect.any(String)
     });
