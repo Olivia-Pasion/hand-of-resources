@@ -20,8 +20,8 @@ describe('backend-express-template routes', () => {
 
   it('#GET /ac_villagers/:id should return villager detail', async () => {
     const resp = await request(app).get('/ac_villagers/1');
-    expect(resp.body.length).toEqual(1);
-    expect(resp.body[0]).toEqual({
+    console.log('HERE', resp.body);
+    expect(resp.body).toEqual({
       name: expect.any(String),
       species: expect.any(String),
       catchphrase: expect.any(String)
