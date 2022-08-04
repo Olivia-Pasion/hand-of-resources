@@ -15,13 +15,24 @@ describe('backend-express-template routes', () => {
       id: expect.any(String),
       name: expect.any(String),
     });
-    console.log('HERE', resp.body);
   });
-
+  
   it('#GET /ac_villagers/:id should return villager detail', async () => {
     const resp = await request(app).get('/ac_villagers/1');
     console.log('HERE', resp.body);
     expect(resp.body).toEqual({
+      name: expect.any(String),
+      species: expect.any(String),
+      catchphrase: expect.any(String)
+    });
+  });
+  
+  it('#POST /ac_villagers should add a new villager', async () => {
+    const resp = await request(app).post('/ac_villagers').send({ name: 'Yuka', species: 'Koala', catchphrase: 'tsk tsk' });
+    console.log('HERE', resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
       name: expect.any(String),
       species: expect.any(String),
       catchphrase: expect.any(String)
