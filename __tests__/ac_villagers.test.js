@@ -19,17 +19,16 @@ describe('backend-express-template routes', () => {
   
   it('#GET /ac_villagers/:id should return villager detail', async () => {
     const resp = await request(app).get('/ac_villagers/1');
-    console.log('HERE', resp.body);
     expect(resp.body).toEqual({
       name: expect.any(String),
       species: expect.any(String),
       catchphrase: expect.any(String)
     });
+
   });
   
   it('#POST /ac_villagers should add a new villager', async () => {
     const resp = await request(app).post('/ac_villagers').send({ name: 'Yuka', species: 'Koala', catchphrase: 'tsk tsk' });
-    console.log('HERE', resp.body);
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
       id: expect.any(String),
@@ -37,6 +36,16 @@ describe('backend-express-template routes', () => {
       species: expect.any(String),
       catchphrase: expect.any(String)
     });
+  });
+
+  it('#DELETE /ac_villagers/:id should delete a villager from the table', async () => {
+    const resp = await request(app).delete('/ac_villagers/1');
+    console.log(resp.status);
+    expect(resp.status).toBe(200);
+    
+    const villagerResp = await request(app).get('/ac_villagers/1');
+    expect(villagerResp.status).toBe(404);
+    console.log(villagerResp.status);
   });
   afterAll(async () => {
     await setup (pool);
