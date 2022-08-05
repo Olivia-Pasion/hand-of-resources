@@ -39,6 +39,13 @@ describe('backend-express-template routes', () => {
     expect(resp.status).toBe(200);
     expect(resp.body.longHair).toBe(false);
   });
+  it('#DELETE /cats/:id should delete a cat from the table', async () => {
+    const resp = await request(app).delete('/cats/1');
+    expect(resp.status).toBe(200);
+    
+    const catResp = await request(app).get('/cats/1');
+    expect(catResp.status).toBe(404);
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
