@@ -23,7 +23,15 @@ describe('backend-express-template routes', () => {
       longHair: expect.any(Boolean)
     });
   });
-
+  it('#POST /cats should add a new cat', async () => {
+    const resp = await request(app).post('/cats').send({ breed: 'Ragdoll', longHair: true });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      breed: expect.any(String),
+      longHair: expect.any(Boolean)
+    });
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
