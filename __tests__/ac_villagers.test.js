@@ -1,6 +1,5 @@
 const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
-//const { request } = require('express');
 const request = require('supertest');
 const app = require('../lib/app');
 
@@ -38,7 +37,7 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it.skip('#DELETE /ac_villagers/:id should delete a villager from the table', async () => {
+  it('#DELETE /ac_villagers/:id should delete a villager from the table', async () => {
     const resp = await request(app).delete('/ac_villagers/1');
     console.log(resp.status);
     expect(resp.status).toBe(200);
