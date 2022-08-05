@@ -10,10 +10,10 @@ describe('backend-express-template routes', () => {
   it('#GET /cats should provide a list of cats', async () => {
     const resp = await request(app).get('/cats');
     expect(resp.body.length).toEqual(5);
+    console.log(resp.body);
     expect(resp.body[0]).toEqual({
       id: expect.any(String),
-      breed: expect.any(String),
-      longHair: expect.any(Boolean)
+      breed: expect.any(String)
     });
   });
   afterAll(async () => {
