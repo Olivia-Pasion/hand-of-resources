@@ -46,7 +46,7 @@ describe('backend-express-template routes', () => {
   });
   it('#PUT /ac_villagers/:id should update an existing villager', async () => {
     const resp = await request(app).put('/ac_villagers/2').send({
-      catchphrase: 'woohoo!',
+      catchphrase: 'woohoo!'
     });
     expect(resp.status).toBe(200);
     expect(resp.body.catchphrase).toBe('woohoo!');

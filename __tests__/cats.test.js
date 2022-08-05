@@ -10,7 +10,6 @@ describe('backend-express-template routes', () => {
   it('#GET /cats should provide a list of cats', async () => {
     const resp = await request(app).get('/cats');
     expect(resp.body.length).toEqual(5);
-    console.log(resp.body);
     expect(resp.body[0]).toEqual({
       id: expect.any(String),
       breed: expect.any(String)
@@ -31,6 +30,14 @@ describe('backend-express-template routes', () => {
       breed: expect.any(String),
       longHair: expect.any(Boolean)
     });
+  });
+  it('#PUT /cats/:id should update existing cat', async () => {
+    const resp = await request(app).put('/cats/2').send({ longHair: false 
+    });
+    console.log(resp.status);
+    console.log('LOOK', resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body.longHair).toBe(false);
   });
   afterAll(async () => {
     await setup (pool);
