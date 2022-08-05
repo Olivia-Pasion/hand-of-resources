@@ -38,7 +38,7 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it('#DELETE /ac_villagers/:id should delete a villager from the table', async () => {
+  it.skip('#DELETE /ac_villagers/:id should delete a villager from the table', async () => {
     const resp = await request(app).delete('/ac_villagers/1');
     console.log(resp.status);
     expect(resp.status).toBe(200);
@@ -46,6 +46,14 @@ describe('backend-express-template routes', () => {
     const villagerResp = await request(app).get('/ac_villagers/1');
     expect(villagerResp.status).toBe(404);
     console.log(villagerResp.status);
+  });
+  it('#PUT /ac_villagers/:id should update an existing villager', async () => {
+    const resp = await request(app).put('/ac_villagers/2').send({
+      catchphrase: 'woohoo!',
+    });
+    console.log(resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body.catchphrase).toBe('woohoo!');
   });
   afterAll(async () => {
     await setup (pool);
