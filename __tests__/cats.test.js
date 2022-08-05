@@ -16,6 +16,14 @@ describe('backend-express-template routes', () => {
       breed: expect.any(String)
     });
   });
+  it('#GET /cats/:id provides cat detail', async () => {
+    const resp = await request(app).get('/cats/1');
+    expect(resp.body).toEqual({
+      breed: expect.any(String),
+      longHair: expect.any(Boolean)
+    });
+  });
+
   afterAll(async () => {
     await setup (pool);
     pool.end();
