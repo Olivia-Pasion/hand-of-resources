@@ -23,6 +23,23 @@ describe('backend-express-template routes', () => {
       oz: expect.any(Number)
     });
   });
+  it('#POST /coffee_drinks should add a new drink', async () => {
+    const resp = await request(app).post('/coffee_drinks').send({ name: 'latte', milk: true, oz: 8 });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+      milk: expect.any(Boolean),
+      oz: expect.any(Number)
+    });
+  });
+  it('#PUT /coffee_drinks should update a coffee drink', async () => {
+    const resp = await request(app).put('/coffee_drinks/2').send({
+      oz: 12
+    });
+    expect(resp.status).toBe(200);
+    expect(resp.body.oz).toBe(12);
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
