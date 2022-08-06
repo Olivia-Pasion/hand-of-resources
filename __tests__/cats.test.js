@@ -34,8 +34,6 @@ describe('backend-express-template routes', () => {
   it('#PUT /cats/:id should update existing cat', async () => {
     const resp = await request(app).put('/cats/2').send({ longHair: false 
     });
-    console.log(resp.status);
-    console.log('LOOK', resp.body);
     expect(resp.status).toBe(200);
     expect(resp.body.longHair).toBe(false);
   });
