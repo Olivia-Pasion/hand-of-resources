@@ -15,6 +15,14 @@ describe('backend-express-template routes', () => {
       name: expect.any(String)
     });
   });
+  it('#GET /coffee_drinks/:id should return coffee drink detail', async () => {
+    const resp = await request(app).get('/coffee_drinks/1');
+    expect(resp.body).toEqual({
+      name: expect.any(String),
+      milk: expect.any(Boolean),
+      oz: expect.any(Number)
+    });
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
