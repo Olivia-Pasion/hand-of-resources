@@ -22,6 +22,16 @@ describe('backend-express-template routes', () => {
       location: expect.any(String)
     });
   });
+  it('#POST /art_museums adds a new museum to list', async () => {
+    const resp = await request(app).post('/art_museums').send({
+      name: 'Guggenheim', location: 'New York' });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+      location: expect.any(String)
+    });
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
