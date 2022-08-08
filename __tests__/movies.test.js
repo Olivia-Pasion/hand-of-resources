@@ -38,6 +38,13 @@ describe('backend-express-template routes', () => {
     expect(resp.status).toBe(200);
     expect(resp.body.premiere).toBe('1901-01-01T08:00:00.000Z');
   });
+  it('#DELETE /movies/:id should remove movie from list', async () => {
+    const resp = await request(app).delete('/movies/1');
+    expect(resp.status).toBe(200);
+    
+    const movieResp = await request(app).get('/movies/1');
+    expect(movieResp.status).toBe(404);
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
