@@ -36,7 +36,7 @@ describe('backend-express-template routes', () => {
   it('#PUT /movies/:id should update existing movie', async () => {
     const resp = await request(app).put('/movies/2').send({ premiere: '01-01-1901' });
     expect(resp.status).toBe(200);
-    expect(resp.body.premiere).toBe('1901-01-01T08:00:00.000Z');
+    expect(resp.body.premiere).toBe('1901-01-01T00:00:00.000Z');
   });
   it('#DELETE /movies/:id should remove movie from list', async () => {
     const resp = await request(app).delete('/movies/1');
