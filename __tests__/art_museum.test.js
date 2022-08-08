@@ -32,6 +32,11 @@ describe('backend-express-template routes', () => {
       location: expect.any(String)
     });
   });
+  it('#PUT /art_museums updates a museum attribute', async () => {
+    const resp = await request(app).put('/art_museums/1').send({ location: 'San Francisco' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.location).toBe('San Francisco');
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
