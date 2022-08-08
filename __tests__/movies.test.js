@@ -15,7 +15,14 @@ describe('backend-express-template routes', () => {
       title: expect.any(String)
     });
   });
-
+  it('#GET /movies/:id should return a movie detail', async () => {
+    const resp = await request(app).get('/movies/1');
+    expect(resp.body).toEqual({
+      title: expect.any(String),
+      director: expect.any(String),
+      premiere: expect.any(String)
+    });
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
