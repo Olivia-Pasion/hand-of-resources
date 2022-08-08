@@ -37,6 +37,13 @@ describe('backend-express-template routes', () => {
     expect(resp.status).toBe(200);
     expect(resp.body.location).toBe('San Francisco');
   });
+  it('#DELETE /art_museums/:id deletes museum from list', async () => {
+    const resp = await request(app).delete('/art_museums/1');
+    expect(resp.status).toBe(200);
+
+    const museumResp = await request(app).get('/art_museums/1');
+    expect(museumResp.status).toBe(404);
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
