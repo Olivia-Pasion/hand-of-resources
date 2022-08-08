@@ -40,6 +40,13 @@ describe('backend-express-template routes', () => {
     expect(resp.status).toBe(200);
     expect(resp.body.oz).toBe(12);
   });
+  it('#DELETE /coffee_drinks/:id', async () => {
+    const resp = await request(app).delete('/coffee_drinks/1');
+    expect(resp.status).toBe(200);
+
+    const villagerResp = await request(app).get('/coffee_drinks/1');
+    expect(villagerResp.status).toBe(404);
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
