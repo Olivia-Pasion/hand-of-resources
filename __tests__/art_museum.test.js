@@ -15,6 +15,13 @@ describe('backend-express-template routes', () => {
       name: expect.any(String)
     });
   });
+  it('#GET /art_museums/:id should return museum details', async () => {
+    const resp = await request(app).get('/art_museums/2');
+    expect(resp.body).toEqual({
+      name: expect.any(String),
+      location: expect.any(String)
+    });
+  });
   afterAll(async () => {
     await setup (pool);
     pool.end();
